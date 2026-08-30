@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Paceria
+       開いた本（READ）を、途中で止まったリング（MOVE の週ペース）が囲む。
+       リングを閉じないことがこのアプリの主張なので、満タンにしないこと。
+       要素は「本 + リング」の1組だけに保つ。増やすと実寸で崩れる。 -->
+  <rect width="1024" height="1024" fill="#2B5F4E"/>
+  <g fill="none" stroke-linecap="round" stroke-width="84">
+    <circle cx="512" cy="512" r="330" stroke="#24513F"/>
+    <path d="M 512 182 A 330 330 0 0 1 800 676" stroke="#E5B04A"/>
+  </g>
+  <g fill="#F1EADC">
+    <path d="M 512 404 C 456 366, 380 364, 328 376 L 328 570 C 380 558, 456 562, 512 598 Z"/>
+    <path d="M 512 404 C 568 366, 644 364, 696 376 L 696 570 C 644 558, 568 562, 512 598 Z"/>
+  </g>
+</svg>
