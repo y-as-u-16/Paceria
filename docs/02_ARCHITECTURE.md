@@ -24,14 +24,14 @@
 
 # 2. Why This Architecture
 
-PaceはMVP時点では小〜中規模。
+PaceriaはMVP時点では小〜中規模。
 
 しかし以下のルールはUIから分離したい。
 
 - 週目標判定
 - 月目標判定
 - 期間境界
-- Pace判定
+- Paceria判定
 - 読了処理
 - Insights集計
 
@@ -95,9 +95,9 @@ Foundationは必要最小限で使用可能。
 # 4. Recommended Project Structure
 
 ```text
-Pace/
+Paceria/
 ├── App/
-│   ├── PaceApp.swift
+│   ├── PaceriaApp.swift
 │   ├── AppContainer.swift
 │   ├── AppRouter.swift
 │   └── RootView.swift
@@ -532,7 +532,7 @@ Core/DesignSystem/
 - spacing
 - corner radius
 - typography
-- PaceCard
+- PaceriaCard
 - EmptyState
 - PrimaryButton
 - ProgressIndicator

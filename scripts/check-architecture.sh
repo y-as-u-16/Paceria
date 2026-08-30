@@ -8,9 +8,9 @@
 # 検証されない規約は必ず腐る。本スクリプトは設計書の実行可能な半身である。
 #
 # Feature-based layout means Domain is not one directory but many:
-# Pace/Features/*/Domain and Pace/Core/Domain. Checks glob over all of them.
-# Feature-based のため Domain は一箇所ではなく Pace/Features/*/Domain と
-# Pace/Core/Domain に分散する。検査は両方を走査する。
+# Paceria/Features/*/Domain and Paceria/Core/Domain. Checks glob over all of them.
+# Feature-based のため Domain は一箇所ではなく Paceria/Features/*/Domain と
+# Paceria/Core/Domain に分散する。検査は両方を走査する。
 #
 # Usage: ./scripts/check-architecture.sh
 
@@ -26,7 +26,7 @@ fail() {
 # Collects every Domain directory across features plus Core.
 # Feature 横断で Domain ディレクトリを集める。
 domain_dirs() {
-  find Pace -type d -name Domain 2>/dev/null
+  find Paceria -type d -name Domain 2>/dev/null
 }
 
 # --- Rule: Domain must not import UI/persistence frameworks ----------------
@@ -53,11 +53,11 @@ done < <(domain_dirs)
 
 # --- Rule: Views must not query SwiftData directly ------------------------
 # View から SwiftData を直接触らない（02_ARCHITECTURE.md #7, #19）
-if [ -d Pace/Features ]; then
+if [ -d Paceria/Features ]; then
   while IFS=: read -r file line _; do
     [ -z "$file" ] && continue
     fail "$file" "$line" "Presentation must not use @Query/ModelContext directly (02_ARCHITECTURE.md #7, #19) / Presentation 層で SwiftData を直接操作しないでください"
-  done < <(find Pace/Features -type d -name Presentation -exec grep -rnE '@Query|ModelContext|FetchDescriptor' {} --include='*.swift' \; 2>/dev/null)
+  done < <(find Paceria/Features -type d -name Presentation -exec grep -rnE '@Query|ModelContext|FetchDescriptor' {} --include='*.swift' \; 2>/dev/null)
 fi
 
 # --- Rule: no Manager / Utils catch-all types -----------------------------
@@ -65,12 +65,12 @@ fi
 while IFS=: read -r file line _; do
   [ -z "$file" ] && continue
   fail "$file" "$line" "Avoid catch-all Manager types; name the responsibility (02_ARCHITECTURE.md #19) / 万能な Manager クラスは避け、責務を名前で表してください"
-done < <(grep -rnE '(class|struct|final class) +[A-Z][A-Za-z]*Manager\b' Pace --include='*.swift' 2>/dev/null)
+done < <(grep -rnE '(class|struct|final class) +[A-Z][A-Za-z]*Manager\b' Paceria --include='*.swift' 2>/dev/null)
 
 while IFS= read -r file; do
   [ -z "$file" ] && continue
   fail "$file" "1" "Utils.swift is a catch-all; split by responsibility (02_ARCHITECTURE.md #19) / Utils.swift は雑多置き場です。責務ごとに分割してください"
-done < <(find Pace -name 'Utils.swift' 2>/dev/null)
+done < <(find Paceria -name 'Utils.swift' 2>/dev/null)
 
 # --- Result ---------------------------------------------------------------
 if [ "$violations" -gt 0 ]; then

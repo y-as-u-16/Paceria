@@ -39,8 +39,8 @@ jobs:
     runs-on: macos-26
     timeout-minutes: 30
     env:
-      SCHEME: Pace
-      PROJECT: Pace.xcodeproj
+      SCHEME: Paceria
+      PROJECT: Paceria.xcodeproj
       # Simulator signing resolves automatically. Setting CODE_SIGNING_ALLOWED=NO
       # prevents the .xctest bundle from loading and fails with TEST EXECUTE FAILED.
       # シミュレータ向けは署名が自動解決される。CODE_SIGNING_ALLOWED=NO を指定すると
@@ -77,7 +77,7 @@ jobs:
             -project "$PROJECT" \
             -scheme "$SCHEME" \
             -destination "$DESTINATION" \
-            -only-testing:PaceTests \
+            -only-testing:PaceriaTests \
             -resultBundlePath TestResults.xcresult \
             | xcbeautify
 

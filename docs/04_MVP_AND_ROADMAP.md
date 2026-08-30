@@ -151,7 +151,7 @@ CalculateGoalProgress
 ```text
 GetHomeSummary
 HomeViewModel
-Pace Cards
+Paceria Cards
 Recent Wins
 ```
 
@@ -455,7 +455,7 @@ Visual keywords:
 
 重要。
 
-Paceへ以下を追加し始めると、
+Paceriaへ以下を追加し始めると、
 
 ```text
 Meditation
@@ -469,7 +469,7 @@ Cleaning
 
 一般的なHabit Trackerになる。
 
-Paceの最初の差別化は、
+Paceriaの最初の差別化は、
 
 ```text
 READ

@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct PaceApp: App {
+struct PaceriaApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

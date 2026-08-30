@@ -1,6 +1,6 @@
 import XCTest
 
-final class PaceUITestsLaunchTests: XCTestCase {
+final class PaceriaUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

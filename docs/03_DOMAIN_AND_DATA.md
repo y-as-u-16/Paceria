@@ -217,7 +217,7 @@ MVPでは **session数として複数カウント可能**。
 
 ---
 
-# 11. Pace History
+# 11. Paceria History
 
 ```swift
 struct PeriodAchievement: Equatable, Sendable {
@@ -258,7 +258,7 @@ Daily streakは以下を暗黙的に要求する。
 今日やらなければ継続が壊れる
 ```
 
-Paceでは、
+Paceriaでは、
 
 ```text
 この期間で自分が決めた量を満たせたか
@@ -465,7 +465,7 @@ updatedAt Date
 Schema versionを初期から定義。
 
 ```text
-PaceSchemaV1
+PaceriaSchemaV1
 ```
 
 将来:
@@ -509,7 +509,7 @@ Phase 2。
 - Workout import
 
 ただしHealthKitデータを取り込む場合でも、
-PaceのMovementSessionへnormalizeする。
+PaceriaのMovementSessionへnormalizeする。
 
 ```text
 HealthKit Workout

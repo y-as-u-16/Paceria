@@ -1,7 +1,7 @@
 import Testing
-@testable import Pace
+@testable import Paceria
 
-struct PaceTests {
+struct PaceriaTests {
 
     @Test func example() async throws {
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.

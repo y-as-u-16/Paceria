@@ -1,12 +1,15 @@
-# Pace
+# Paceria
 
 > 毎日やらなくていい。自分で決めたペースを守れているかだけを見る。
 
 読書と運動の記録アプリ。「何日連続で続いたか」ではなく、**自分で決めた週/月の
 ペースを満たせたか**を可視化する。水曜に何もしなくても、それは失敗ではない。
 
-[![CI](https://github.com/y-as-u-16/Pace/actions/workflows/ci.yml/badge.svg)](https://github.com/y-as-u-16/Pace/actions/workflows/ci.yml)
-[![Guards](https://github.com/y-as-u-16/Pace/actions/workflows/guards.yml/badge.svg)](https://github.com/y-as-u-16/Pace/actions/workflows/guards.yml)
+名前は *pace*（自分の歩調）に、場所を表す *-ria* を付けた造語。
+急かされずに知性と身体を積み上げていく場所、という意味を込めている。
+
+[![CI](https://github.com/y-as-u-16/Paceria/actions/workflows/ci.yml/badge.svg)](https://github.com/y-as-u-16/Paceria/actions/workflows/ci.yml)
+[![Guards](https://github.com/y-as-u-16/Paceria/actions/workflows/guards.yml/badge.svg)](https://github.com/y-as-u-16/Paceria/actions/workflows/guards.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
@@ -30,7 +33,7 @@
 
 一般的な習慣トラッカーは「連続日数」を主役にする。1日空けると壊れる。
 
-Pace は違う指標を使う。
+Paceria は違う指標を使う。
 
 ```
 目標: 運動 週2回
@@ -83,9 +86,9 @@ Feature-based Pragmatic Clean Architecture + MVVM
 ## Build
 
 ```bash
-git clone https://github.com/y-as-u-16/Pace.git
-cd Pace
-open Pace.xcodeproj
+git clone https://github.com/y-as-u-16/Paceria.git
+cd Paceria
+open Paceria.xcodeproj
 ```
 
 `DEVELOPMENT_TEAM` は空にして公開している。シミュレータ向けのビルドと
@@ -96,10 +99,10 @@ open Pace.xcodeproj
 
 ```bash
 xcodebuild test \
-  -project Pace.xcodeproj \
-  -scheme Pace \
+  -project Paceria.xcodeproj \
+  -scheme Paceria \
   -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
-  -only-testing:PaceTests
+  -only-testing:PaceriaTests
 ```
 
 ### Guards

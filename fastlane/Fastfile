@@ -1,8 +1,8 @@
 default_platform(:ios)
 
-APP_IDENTIFIER = "com.egi-engineer.Pace".freeze
-PROJECT = "Pace.xcodeproj".freeze
-SCHEME = "Pace".freeze
+APP_IDENTIFIER = "com.egi-engineer.Paceria".freeze
+PROJECT = "Paceria.xcodeproj".freeze
+SCHEME = "Paceria".freeze
 
 # 公開リポジトリのため Team ID はソースへ書かず環境変数から読む。
 def team_id

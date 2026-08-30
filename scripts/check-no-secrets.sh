@@ -25,7 +25,7 @@ fail() {
 while IFS=: read -r file line _; do
   [ -z "$file" ] && continue
   fail "$file" "$line" "DEVELOPMENT_TEAM must stay empty in a public repository; Xcode rewrote it. Run: git checkout -- $file / 公開リポジトリでは DEVELOPMENT_TEAM を空に保ちます。Xcode が書き戻したので元に戻してください"
-done < <(grep -HnE 'DEVELOPMENT_TEAM = [^"]' Pace.xcodeproj/project.pbxproj 2>/dev/null)
+done < <(grep -HnE 'DEVELOPMENT_TEAM = [^"]' Paceria.xcodeproj/project.pbxproj 2>/dev/null)
 
 # --- No credentials anywhere in the tree ----------------------------------
 # 認証情報がツリーに含まれていないこと

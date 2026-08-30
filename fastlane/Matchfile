@@ -5,7 +5,7 @@ storage_mode("git")
 git_branch("main")
 
 type("appstore")
-app_identifier(["com.egi-engineer.Pace"])
+app_identifier(["com.egi-engineer.Paceria"])
 team_id(ENV.fetch("DEVELOPMENT_TEAM"))
 
 # Cookory / BaseMatch と証明書リポジトリを共有するため、暗号化方式を揃える。

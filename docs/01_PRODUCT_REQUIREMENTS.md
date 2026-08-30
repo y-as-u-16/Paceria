@@ -6,17 +6,17 @@
 
 Working title:
 
-**Pace**
+**Paceria**
 
 日本語:
 
-**Pace - 読書と運動の記録**
+**Paceria - 読書と運動の記録**
 
 英語:
 
-**Pace — Read & Move**
+**Paceria — Read & Move**
 
-「Pace」は、このアプリの中心思想である「他人ではなく、自分のペースで継続する」を直接表現できる。
+「Paceria」は、このアプリの中心思想である「他人ではなく、自分のペースで継続する」を直接表現できる。
 
 ---
 
@@ -87,7 +87,7 @@ Working title:
 
 を一目で知りたいケースがある。
 
-Paceはここを扱う。
+Paceriaはここを扱う。
 
 ---
 
@@ -207,7 +207,7 @@ Source:
 
 # 7. Positioning
 
-Paceのポジションは、
+Paceriaのポジションは、
 
 ```text
 Book Tracker        Workout Tracker
@@ -241,7 +241,7 @@ Book Tracker        Workout Tracker
 木 ✓
 ```
 
-Pace:
+Paceria:
 
 ```text
 Goal: Workout 2 / week
@@ -311,7 +311,7 @@ Good
 
 ## 8.4 Gentle Consistency
 
-Paceでは以下を禁止する。
+Paceriaでは以下を禁止する。
 
 - 赤色で「失敗」
 - streak resetを過度に強調
@@ -354,7 +354,7 @@ Paceでは以下を禁止する。
 
 表示:
 
-- 今週 / 今月のPace
+- 今週 / 今月のPaceria
 - Reading progress
 - Movement progress
 - 最近の記録
@@ -437,7 +437,7 @@ StrengthのSets / Reps / WeightはMVP対象外。
 理由:
 
 そこまで実装するとHevy等の専用アプリと真正面から競合し、
-Paceの「シンプルな継続記録」から外れる。
+Paceriaの「シンプルな継続記録」から外れる。
 
 ---
 
@@ -478,12 +478,12 @@ MVPでは以下に限定。
 
 単純なDaily streakを使わない。
 
-### Pace Rate
+### Paceria Rate
 
 直近N期間における達成期間の割合。
 
 ```text
-Pace Rate =
+Paceria Rate =
 achievedPeriods / completedPeriods
 ```
 
@@ -493,7 +493,7 @@ achievedPeriods / completedPeriods
 直近8週間
 6週間でWorkout goal達成
 
-Pace Rate = 75%
+Paceria Rate = 75%
 ```
 
 UIでは「75点」と採点するより、
@@ -617,7 +617,7 @@ MVPでは初期OFFでもよい。
 
 ```text
 Sunday afternoon:
-あと1回で今週のMovement Pace達成です
+あと1回で今週のMovement Paceria達成です
 ```
 
 は禁止ではないが、
@@ -632,7 +632,7 @@ Sunday afternoon:
 
 # 17. Social / Sharing Policy
 
-Paceは**アプリ内SNSを実装しない**。
+Paceriaは**アプリ内SNSを実装しない**。
 
 これはMVP上の一時的な対象外ではなく、プロダクト方針とする。
 
