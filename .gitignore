@@ -48,6 +48,10 @@ Packages/
 *.cer
 *.certSigningRequest
 Secrets.xcconfig
+# fastlane が自動で読むのは .env / .env.default / .env.<環境名> のみ。
+# `*.env` と `.env.*` は単独の `.env` にマッチしないため個別に指定する。
+.env
+.env.default
 *.env
 .env.*
 !.env.example
