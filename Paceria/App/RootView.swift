@@ -20,7 +20,8 @@ struct RootView: View {
                 LibraryView(
                     viewModel: container.makeLibraryViewModel(),
                     makeAddViewModel: container.makeAddBookViewModel,
-                    makeDetailViewModel: container.makeBookDetailViewModel
+                    makeDetailViewModel: container.makeBookDetailViewModel,
+                    makeGoalSettingsViewModel: container.makeGoalSettingsViewModel
                 )
             } label: {
                 Label("tab.library", systemImage: "books.vertical")

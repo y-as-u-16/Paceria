@@ -6,15 +6,18 @@ struct LibraryView: View {
 
     private let makeAddViewModel: () -> AddBookViewModel
     private let makeDetailViewModel: (UUID) -> BookDetailViewModel
+    private let makeGoalSettingsViewModel: () -> GoalSettingsViewModel
 
     init(
         viewModel: LibraryViewModel,
         makeAddViewModel: @escaping () -> AddBookViewModel,
-        makeDetailViewModel: @escaping (UUID) -> BookDetailViewModel
+        makeDetailViewModel: @escaping (UUID) -> BookDetailViewModel,
+        makeGoalSettingsViewModel: @escaping () -> GoalSettingsViewModel
     ) {
         _viewModel = State(wrappedValue: viewModel)
         self.makeAddViewModel = makeAddViewModel
         self.makeDetailViewModel = makeDetailViewModel
+        self.makeGoalSettingsViewModel = makeGoalSettingsViewModel
     }
 
     var body: some View {
@@ -25,6 +28,14 @@ struct LibraryView: View {
                     BookDetailView(viewModel: makeDetailViewModel(bookID))
                 }
                 .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        NavigationLink {
+                            GoalSettingsView(viewModel: makeGoalSettingsViewModel())
+                        } label: {
+                            Label("goals.title", systemImage: "target")
+                        }
+                        .accessibilityIdentifier("goals.open")
+                    }
                     ToolbarItem(placement: .primaryAction) {
                         Button("reading.add.title", systemImage: "plus") {
                             isAddingBook = true

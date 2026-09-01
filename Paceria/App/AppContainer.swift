@@ -7,11 +7,13 @@ final class AppContainer {
     let modelContainer: ModelContainer
     let movementRepository: any MovementRepository
     let bookRepository: any BookRepository
+    let goalRepository: any GoalRepository
 
     init(modelContainer: ModelContainer) {
         self.modelContainer = modelContainer
         self.movementRepository = SwiftDataMovementRepository(modelContainer: modelContainer)
         self.bookRepository = SwiftDataBookRepository(modelContainer: modelContainer)
+        self.goalRepository = SwiftDataGoalRepository(modelContainer: modelContainer)
     }
 
     func makeActivityViewModel() -> ActivityViewModel {
@@ -28,6 +30,17 @@ final class AppContainer {
 
     func makeAddBookViewModel() -> AddBookViewModel {
         AddBookViewModel(repository: bookRepository)
+    }
+
+    func makeGoalSettingsViewModel() -> GoalSettingsViewModel {
+        GoalSettingsViewModel(repository: goalRepository)
+    }
+
+    func makeCalculateGoalProgressUseCase() -> CalculateGoalProgressUseCase {
+        CalculateGoalProgressUseCase(
+            bookRepository: bookRepository,
+            movementRepository: movementRepository
+        )
     }
 
     func makeBookDetailViewModel(bookID: UUID) -> BookDetailViewModel {
