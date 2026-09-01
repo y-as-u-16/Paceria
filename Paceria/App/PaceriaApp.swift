@@ -18,7 +18,7 @@ struct PaceriaApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
+            RootView(container: container)
                 .environment(router)
         }
         .modelContainer(container.modelContainer)

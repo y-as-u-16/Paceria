@@ -3,6 +3,8 @@ import SwiftUI
 struct RootView: View {
     @Environment(AppRouter.self) private var router
 
+    let container: AppContainer
+
     var body: some View {
         @Bindable var router = router
 
@@ -22,7 +24,10 @@ struct RootView: View {
             .accessibilityIdentifier("tab.library")
 
             Tab(value: AppTab.activity) {
-                PlaceholderScreen(titleKey: "tab.activity")
+                ActivityView(
+                    viewModel: container.makeActivityViewModel(),
+                    makeAddViewModel: container.makeAddMovementViewModel
+                )
             } label: {
                 Label("tab.activity", systemImage: "figure.walk")
             }
@@ -38,7 +43,7 @@ struct RootView: View {
     }
 }
 
-/// Phase 1 以降で各 Feature の View へ差し替える。
+/// Phase 2 以降で各 Feature の View へ差し替える。
 private struct PlaceholderScreen: View {
     let titleKey: LocalizedStringKey
 
@@ -52,9 +57,4 @@ private struct PlaceholderScreen: View {
             .navigationTitle(titleKey)
         }
     }
-}
-
-#Preview {
-    RootView()
-        .environment(AppRouter())
 }
