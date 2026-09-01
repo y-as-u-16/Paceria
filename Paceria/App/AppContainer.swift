@@ -54,6 +54,10 @@ final class AppContainer {
         )
     }
 
+    func makeOnboardingViewModel() -> OnboardingViewModel {
+        OnboardingViewModel(repository: goalRepository)
+    }
+
     func makeGoalSettingsViewModel() -> GoalSettingsViewModel {
         GoalSettingsViewModel(repository: goalRepository)
     }

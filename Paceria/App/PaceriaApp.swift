@@ -7,6 +7,15 @@ struct PaceriaApp: App {
     @State private var router = AppRouter()
 
     init() {
+        // UI テストがオンボーディングの有無を制御できるようにする。
+        // @AppStorage は起動時の値を読むため、View 生成前に確定させる。
+        let arguments = ProcessInfo.processInfo.arguments
+        if arguments.contains("-resetOnboarding") {
+            UserDefaults.standard.removeObject(forKey: "hasCompletedOnboarding")
+        } else if arguments.contains("-skipOnboarding") {
+            UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
+        }
+
         do {
             container = AppContainer(modelContainer: try ModelContainerFactory.make())
         } catch {

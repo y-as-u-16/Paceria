@@ -115,4 +115,17 @@ platform :ios do
     # 紛れ込むのを防ぐため、CI では毎回捨てる。
     reset_git_repo(files: [PROJECT], force: true) if is_ci
   end
+
+  desc "掲載テキストとスクリーンショットをまとめて更新する"
+  lane :upload_metadata do
+    # バイナリは beta lane が上げる。ここは掲載情報だけを扱う。
+    deliver(
+      api_key: asc_api_key,
+      app_identifier: APP_IDENTIFIER,
+      skip_binary_upload: true,
+      skip_app_version_update: true,
+      force: true,
+      precheck_include_in_app_purchases: false,
+    )
+  end
 end

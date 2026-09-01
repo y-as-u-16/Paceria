@@ -33,7 +33,7 @@ struct AddBookView: View {
                 }
 
                 if let error = viewModel.error {
-                    Text(error.messageKey)
+                    Label(error.messageKey, systemImage: "exclamationmark.circle.fill")
                         .foregroundStyle(.red)
                         .font(Typography.caption)
                 }

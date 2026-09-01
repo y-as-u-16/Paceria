@@ -9,9 +9,10 @@ final class ReadingFlowUITests: XCTestCase {
     @MainActor
     func testAddsBookThenDeletesIt() throws {
         let app = XCUIApplication()
+        app.launchArguments = ["-skipOnboarding"]
         app.launch()
 
-        app.tabBars.buttons["tab.library"].tap()
+        app.tabButton(.library).tap()
 
         app.buttons["book.add"].tap()
         let title = app.textFields["book.title"]
