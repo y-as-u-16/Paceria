@@ -43,27 +43,11 @@ struct RootView: View {
             }
 
             Tab(value: AppTab.insights) {
-                PlaceholderScreen(titleKey: "tab.insights")
+                InsightsView(viewModel: container.makeInsightsViewModel())
             } label: {
                 Label("tab.insights", systemImage: "chart.bar")
                     .accessibilityIdentifier("tab.insights")
             }
-        }
-    }
-}
-
-/// Phase 2 以降で各 Feature の View へ差し替える。
-private struct PlaceholderScreen: View {
-    let titleKey: LocalizedStringKey
-
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView {
-                Label(titleKey, systemImage: "hourglass")
-            } description: {
-                Text("placeholder.description")
-            }
-            .navigationTitle(titleKey)
         }
     }
 }

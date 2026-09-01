@@ -43,6 +43,17 @@ final class AppContainer {
         )
     }
 
+    func makeInsightsViewModel() -> InsightsViewModel {
+        InsightsViewModel(
+            goalRepository: goalRepository,
+            getAchievements: GetPeriodAchievementsUseCase(
+                bookRepository: bookRepository,
+                movementRepository: movementRepository
+            ),
+            calculateProgress: makeCalculateGoalProgressUseCase()
+        )
+    }
+
     func makeGoalSettingsViewModel() -> GoalSettingsViewModel {
         GoalSettingsViewModel(repository: goalRepository)
     }
