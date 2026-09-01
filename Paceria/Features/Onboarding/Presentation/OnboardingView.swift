@@ -27,10 +27,9 @@ struct OnboardingView: View {
                     Text("onboarding.start")
                         .frame(maxWidth: .infinity, minHeight: Layout.minimumTouchTarget)
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(.glassProminent)
                 .disabled(viewModel.isSaving)
                 .padding(Spacing.l)
-                .background(.bar)
                 .accessibilityIdentifier("onboarding.start")
             }
             .navigationTitle("onboarding.title")
@@ -40,11 +39,11 @@ struct OnboardingView: View {
     private var concept: some View {
         VStack(alignment: .leading, spacing: Spacing.m) {
             Text("onboarding.concept.headline")
-                .font(Typography.sectionTitle)
+                .font(.title3)
 
             ForEach(["onboarding.concept.point1", "onboarding.concept.point2", "onboarding.concept.point3"], id: \.self) { key in
                 Label(LocalizedStringKey(key), systemImage: "checkmark.circle")
-                    .font(Typography.body)
+                    .font(.body)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
@@ -53,7 +52,7 @@ struct OnboardingView: View {
     private var goalSection: some View {
         VStack(alignment: .leading, spacing: Spacing.m) {
             Text("onboarding.goals.headline")
-                .font(Typography.sectionTitle)
+                .font(.title3)
 
             Stepper(value: $viewModel.readingTarget, in: GoalSettingsViewModel.minimumTarget...GoalSettingsViewModel.maximumTarget) {
                 LabeledContent("onboarding.goals.reading") {
@@ -70,7 +69,7 @@ struct OnboardingView: View {
             .accessibilityIdentifier("onboarding.movement")
 
             Text("onboarding.goals.footer")
-                .font(Typography.caption)
+                .font(.caption)
                 .foregroundStyle(.secondary)
         }
     }

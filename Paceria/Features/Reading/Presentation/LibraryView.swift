@@ -106,18 +106,18 @@ private struct BookRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.xs) {
             Text(book.title)
-                .font(Typography.cardTitle)
+                .font(.headline)
                 .lineLimit(2)
 
             if let author = book.author {
                 Text(author)
-                    .font(Typography.caption)
+                    .font(.caption)
                     .foregroundStyle(.secondary)
             }
 
             if let finishedAt = book.finishedAt {
                 Text("reading.finishedAt \(finishedAt.formatted(.dateTime.year().month().day()))")
-                    .font(Typography.caption)
+                    .font(.caption)
                     .foregroundStyle(.secondary)
             }
         }

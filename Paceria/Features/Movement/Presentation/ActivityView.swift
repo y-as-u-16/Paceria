@@ -85,15 +85,15 @@ private struct MovementRow: View {
 
             VStack(alignment: .leading, spacing: Spacing.xs) {
                 Text(session.type.labelKey)
-                    .font(Typography.cardTitle)
+                    .font(.headline)
 
                 Text(session.performedAt, format: .dateTime.month().day().hour().minute())
-                    .font(Typography.caption)
+                    .font(.caption)
                     .foregroundStyle(.secondary)
 
                 if let note = session.note {
                     Text(note)
-                        .font(Typography.caption)
+                        .font(.caption)
                         .foregroundStyle(.secondary)
                         .lineLimit(2)
                 }
@@ -103,7 +103,7 @@ private struct MovementRow: View {
 
             if let minutes = session.durationMinutes {
                 Text("movement.duration.minutes \(minutes)")
-                    .font(Typography.caption)
+                    .font(.caption)
                     .foregroundStyle(.secondary)
             }
         }
