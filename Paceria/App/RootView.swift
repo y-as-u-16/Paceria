@@ -17,7 +17,11 @@ struct RootView: View {
             .accessibilityIdentifier("tab.home")
 
             Tab(value: AppTab.library) {
-                PlaceholderScreen(titleKey: "tab.library")
+                LibraryView(
+                    viewModel: container.makeLibraryViewModel(),
+                    makeAddViewModel: container.makeAddBookViewModel,
+                    makeDetailViewModel: container.makeBookDetailViewModel
+                )
             } label: {
                 Label("tab.library", systemImage: "books.vertical")
             }
