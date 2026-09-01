@@ -32,6 +32,17 @@ final class AppContainer {
         AddBookViewModel(repository: bookRepository)
     }
 
+    func makeHomeViewModel() -> HomeViewModel {
+        HomeViewModel(
+            getHomeSummary: GetHomeSummaryUseCase(
+                goalRepository: goalRepository,
+                bookRepository: bookRepository,
+                movementRepository: movementRepository,
+                calculateProgress: makeCalculateGoalProgressUseCase()
+            )
+        )
+    }
+
     func makeGoalSettingsViewModel() -> GoalSettingsViewModel {
         GoalSettingsViewModel(repository: goalRepository)
     }

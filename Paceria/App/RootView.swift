@@ -10,11 +10,15 @@ struct RootView: View {
 
         TabView(selection: $router.selectedTab) {
             Tab(value: AppTab.home) {
-                PlaceholderScreen(titleKey: "tab.home")
+                HomeView(
+                    viewModel: container.makeHomeViewModel(),
+                    makeAddMovementViewModel: container.makeAddMovementViewModel,
+                    makeAddBookViewModel: container.makeAddBookViewModel
+                )
             } label: {
                 Label("tab.home", systemImage: "house")
+                    .accessibilityIdentifier("tab.home")
             }
-            .accessibilityIdentifier("tab.home")
 
             Tab(value: AppTab.library) {
                 LibraryView(
@@ -25,8 +29,8 @@ struct RootView: View {
                 )
             } label: {
                 Label("tab.library", systemImage: "books.vertical")
+                    .accessibilityIdentifier("tab.library")
             }
-            .accessibilityIdentifier("tab.library")
 
             Tab(value: AppTab.activity) {
                 ActivityView(
@@ -35,15 +39,15 @@ struct RootView: View {
                 )
             } label: {
                 Label("tab.activity", systemImage: "figure.walk")
+                    .accessibilityIdentifier("tab.activity")
             }
-            .accessibilityIdentifier("tab.activity")
 
             Tab(value: AppTab.insights) {
                 PlaceholderScreen(titleKey: "tab.insights")
             } label: {
                 Label("tab.insights", systemImage: "chart.bar")
+                    .accessibilityIdentifier("tab.insights")
             }
-            .accessibilityIdentifier("tab.insights")
         }
     }
 }
