@@ -45,11 +45,11 @@ struct BookDetailView: View {
             Section {
                 VStack(alignment: .leading, spacing: Spacing.xs) {
                     Text(book.title)
-                        .font(Typography.sectionTitle)
+                        .font(.title3)
 
                     if let author = book.author {
                         Text(author)
-                            .font(Typography.body)
+                            .font(.body)
                             .foregroundStyle(.secondary)
                     }
                 }

@@ -32,7 +32,7 @@ struct AddMovementView: View {
                 if let error = viewModel.error {
                     Label(error.messageKey, systemImage: "exclamationmark.circle.fill")
                         .foregroundStyle(.red)
-                        .font(Typography.caption)
+                        .font(.caption)
                 }
             }
             .navigationTitle("movement.add.title")
@@ -62,16 +62,13 @@ struct AddMovementView: View {
                         viewModel.type = type
                     } label: {
                         Label(type.labelKey, systemImage: type.symbolName)
-                            .font(Typography.caption)
-                            .padding(.horizontal, Spacing.m)
-                            .padding(.vertical, Spacing.s)
                             .frame(minHeight: Layout.minimumTouchTarget)
-                            .background(
-                                RoundedRectangle(cornerRadius: CornerRadius.chip)
-                                    .fill(viewModel.type == type ? Color.accentColor.opacity(0.15) : Color(.secondarySystemBackground))
-                            )
                     }
-                    .buttonStyle(.plain)
+                    // 選択の強調は System の Button Hierarchy に委ねる。
+                    // 独自 Background を敷くと新しい Control Shape を妨げる。
+                    .buttonStyle(.bordered)
+                    .buttonBorderShape(.capsule)
+                    .tint(viewModel.type == type ? .accentColor : .secondary)
                     // 選択状態を色だけで示さない（04_MVP_AND_ROADMAP.md §11）。
                     .accessibilityAddTraits(viewModel.type == type ? [.isSelected] : [])
                     .accessibilityIdentifier("movement.type.\(type.rawValue)")
@@ -92,7 +89,6 @@ struct AddMovementView: View {
             )
             .keyboardType(.numberPad)
             .multilineTextAlignment(.trailing)
-            .frame(maxWidth: 80)
             .accessibilityIdentifier("movement.duration")
         }
     }

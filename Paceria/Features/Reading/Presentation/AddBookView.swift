@@ -35,7 +35,7 @@ struct AddBookView: View {
                 if let error = viewModel.error {
                     Label(error.messageKey, systemImage: "exclamationmark.circle.fill")
                         .foregroundStyle(.red)
-                        .font(Typography.caption)
+                        .font(.caption)
                 }
             }
             .navigationTitle("reading.add.title")

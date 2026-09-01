@@ -54,24 +54,30 @@ struct HomeView: View {
         }
     }
 
+    /// 行高・余白・角丸は System に委ねる。手組みカードだと OS 更新で
+    /// メトリクスが変わったときに取り残される（Issue #14 §12）。
     private func summaryList(_ summary: HomeSummary) -> some View {
-        ScrollView {
-            VStack(spacing: Spacing.l) {
-                PaceCard(progress: summary.reading, titleKey: "home.reading.title")
+        List {
+            Section {
+                PaceRow(progress: summary.reading, titleKey: "home.reading.title")
                     .accessibilityIdentifier("home.card.reading")
-
-                PaceCard(progress: summary.movement, titleKey: "home.movement.title")
+                PaceRow(progress: summary.movement, titleKey: "home.movement.title")
                     .accessibilityIdentifier("home.card.movement")
+            }
 
-                quickAdd
-
-                if !summary.recentWins.isEmpty {
-                    recentWins(summary.recentWins)
+            if !summary.recentWins.isEmpty {
+                Section("home.recentWins.title") {
+                    ForEach(Array(summary.recentWins.enumerated()), id: \.offset) { _, win in
+                        Label(win.messageKey, systemImage: win.symbolName)
+                    }
                 }
             }
-            .padding(Spacing.m)
         }
         .accessibilityIdentifier("home.summary")
+        // Quick Add は Content ではなく操作要素。コンテンツの上に浮かせる。
+        .safeAreaInset(edge: .bottom) {
+            quickAdd
+        }
     }
 
     private var quickAdd: some View {
@@ -86,30 +92,12 @@ struct HomeView: View {
             }
             .accessibilityIdentifier("home.quickAdd.book")
         }
-    }
-
-    private func recentWins(_ wins: [RecentWin]) -> some View {
-        VStack(alignment: .leading, spacing: Spacing.s) {
-            Text("home.recentWins.title")
-                .font(Typography.sectionTitle)
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-            ForEach(Array(wins.enumerated()), id: \.offset) { _, win in
-                Label(win.messageKey, systemImage: win.symbolName)
-                    .font(Typography.body)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.vertical, Spacing.xs)
-            }
-        }
-        .padding(Spacing.m)
-        .background(
-            RoundedRectangle(cornerRadius: CornerRadius.card)
-                .fill(Color(.secondarySystemBackground))
-        )
+        .padding(.horizontal, Spacing.m)
+        .padding(.bottom, Spacing.m)
     }
 }
 
-private struct PaceCard: View {
+private struct PaceRow: View {
     let progress: GoalProgress
     let titleKey: LocalizedStringKey
 
@@ -117,7 +105,7 @@ private struct PaceCard: View {
         VStack(alignment: .leading, spacing: Spacing.s) {
             HStack {
                 Text(titleKey)
-                    .font(Typography.cardTitle)
+                    .font(.headline)
                 Spacer()
                 // 達成を色だけで示さない（04 §11）。記号を併記する。
                 if progress.isAchieved {
@@ -131,18 +119,12 @@ private struct PaceCard: View {
                 .font(Typography.metric)
 
             ProgressView(value: progress.ratio)
-                .tint(.accentColor)
 
             Text(HomeCopy.headline(for: progress))
-                .font(Typography.caption)
+                .font(.caption)
                 .foregroundStyle(.secondary)
         }
-        .padding(Spacing.m)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            RoundedRectangle(cornerRadius: CornerRadius.card)
-                .fill(Color(.secondarySystemBackground))
-        )
+        .padding(.vertical, Spacing.xs)
         .accessibilityElement(children: .combine)
     }
 }
@@ -155,11 +137,8 @@ private struct QuickAddButton: View {
     var body: some View {
         Button(action: action) {
             Label(titleKey, systemImage: systemImage)
-                .font(Typography.body)
                 .frame(maxWidth: .infinity, minHeight: Layout.minimumTouchTarget)
-                .padding(.vertical, Spacing.s)
         }
-        .buttonStyle(.borderedProminent)
-        .buttonBorderShape(.roundedRectangle(radius: CornerRadius.button))
+        .buttonStyle(.glassProminent)
     }
 }
