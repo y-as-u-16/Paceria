@@ -1,9 +1,11 @@
 import Foundation
 
 struct GoalProgress: Equatable, Sendable {
+    let goal: Goal
     let current: Int
-    let target: Int
     let period: DateInterval
+
+    var target: Int { goal.target }
 
     var ratio: Double {
         guard target > 0 else { return 0 }

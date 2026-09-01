@@ -6,10 +6,14 @@ import SwiftData
 final class AppContainer {
     let modelContainer: ModelContainer
     let movementRepository: any MovementRepository
+    let bookRepository: any BookRepository
+    let goalRepository: any GoalRepository
 
     init(modelContainer: ModelContainer) {
         self.modelContainer = modelContainer
         self.movementRepository = SwiftDataMovementRepository(modelContainer: modelContainer)
+        self.bookRepository = SwiftDataBookRepository(modelContainer: modelContainer)
+        self.goalRepository = SwiftDataGoalRepository(modelContainer: modelContainer)
     }
 
     func makeActivityViewModel() -> ActivityViewModel {
@@ -18,5 +22,58 @@ final class AppContainer {
 
     func makeAddMovementViewModel() -> AddMovementViewModel {
         AddMovementViewModel(repository: movementRepository)
+    }
+
+    func makeLibraryViewModel() -> LibraryViewModel {
+        LibraryViewModel(repository: bookRepository)
+    }
+
+    func makeAddBookViewModel() -> AddBookViewModel {
+        AddBookViewModel(repository: bookRepository)
+    }
+
+    func makeHomeViewModel() -> HomeViewModel {
+        HomeViewModel(
+            getHomeSummary: GetHomeSummaryUseCase(
+                goalRepository: goalRepository,
+                bookRepository: bookRepository,
+                movementRepository: movementRepository,
+                calculateProgress: makeCalculateGoalProgressUseCase()
+            )
+        )
+    }
+
+    func makeInsightsViewModel() -> InsightsViewModel {
+        InsightsViewModel(
+            goalRepository: goalRepository,
+            getAchievements: GetPeriodAchievementsUseCase(
+                bookRepository: bookRepository,
+                movementRepository: movementRepository
+            ),
+            calculateProgress: makeCalculateGoalProgressUseCase()
+        )
+    }
+
+    func makeOnboardingViewModel() -> OnboardingViewModel {
+        OnboardingViewModel(repository: goalRepository)
+    }
+
+    func makeGoalSettingsViewModel() -> GoalSettingsViewModel {
+        GoalSettingsViewModel(repository: goalRepository)
+    }
+
+    func makeCalculateGoalProgressUseCase() -> CalculateGoalProgressUseCase {
+        CalculateGoalProgressUseCase(
+            bookRepository: bookRepository,
+            movementRepository: movementRepository
+        )
+    }
+
+    func makeBookDetailViewModel(bookID: UUID) -> BookDetailViewModel {
+        BookDetailViewModel(
+            bookID: bookID,
+            repository: bookRepository,
+            finishBook: FinishBookUseCase(repository: bookRepository)
+        )
     }
 }

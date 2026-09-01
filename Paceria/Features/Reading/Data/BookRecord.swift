@@ -6,6 +6,8 @@ final class BookRecord {
     @Attribute(.unique) var id: UUID
     var title: String
     var author: String?
+    var isbn: String?
+    var coverURL: URL?
     var statusRawValue: String
     var startedAt: Date?
     var finishedAt: Date?
@@ -18,6 +20,8 @@ final class BookRecord {
         id: UUID,
         title: String,
         author: String?,
+        isbn: String?,
+        coverURL: URL?,
         statusRawValue: String,
         startedAt: Date?,
         finishedAt: Date?,
@@ -29,6 +33,8 @@ final class BookRecord {
         self.id = id
         self.title = title
         self.author = author
+        self.isbn = isbn
+        self.coverURL = coverURL
         self.statusRawValue = statusRawValue
         self.startedAt = startedAt
         self.finishedAt = finishedAt

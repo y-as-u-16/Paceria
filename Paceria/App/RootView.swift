@@ -2,26 +2,54 @@ import SwiftUI
 
 struct RootView: View {
     @Environment(AppRouter.self) private var router
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
 
     let container: AppContainer
 
+    /// UI テストは各機能の導線を検証する。オンボーディングを毎回通すと
+    /// 本題に入る前に落ちるため、起動引数で飛ばせるようにする。
+    /// @AppStorage の初期読み取りが UserDefaults への書き込みに先行することが
+    /// あるため、起動引数もここで直接見る。
+    private var skipsOnboarding: Bool {
+        ProcessInfo.processInfo.arguments.contains("-skipOnboarding")
+    }
+
     var body: some View {
+        // fullScreenCover で重ねると、閉じた直後にタブの
+        // accessibilityIdentifier が解決されないことがある。表示自体を分ける。
+        if hasCompletedOnboarding || skipsOnboarding {
+            tabs
+        } else {
+            OnboardingView(viewModel: container.makeOnboardingViewModel()) {
+                hasCompletedOnboarding = true
+            }
+        }
+    }
+
+    private var tabs: some View {
         @Bindable var router = router
 
-        TabView(selection: $router.selectedTab) {
+        return TabView(selection: $router.selectedTab) {
             Tab(value: AppTab.home) {
-                PlaceholderScreen(titleKey: "tab.home")
+                HomeView(
+                    viewModel: container.makeHomeViewModel(),
+                    makeAddMovementViewModel: container.makeAddMovementViewModel,
+                    makeAddBookViewModel: container.makeAddBookViewModel
+                )
             } label: {
                 Label("tab.home", systemImage: "house")
             }
-            .accessibilityIdentifier("tab.home")
 
             Tab(value: AppTab.library) {
-                PlaceholderScreen(titleKey: "tab.library")
+                LibraryView(
+                    viewModel: container.makeLibraryViewModel(),
+                    makeAddViewModel: container.makeAddBookViewModel,
+                    makeDetailViewModel: container.makeBookDetailViewModel,
+                    makeGoalSettingsViewModel: container.makeGoalSettingsViewModel
+                )
             } label: {
                 Label("tab.library", systemImage: "books.vertical")
             }
-            .accessibilityIdentifier("tab.library")
 
             Tab(value: AppTab.activity) {
                 ActivityView(
@@ -31,30 +59,12 @@ struct RootView: View {
             } label: {
                 Label("tab.activity", systemImage: "figure.walk")
             }
-            .accessibilityIdentifier("tab.activity")
 
             Tab(value: AppTab.insights) {
-                PlaceholderScreen(titleKey: "tab.insights")
+                InsightsView(viewModel: container.makeInsightsViewModel())
             } label: {
                 Label("tab.insights", systemImage: "chart.bar")
             }
-            .accessibilityIdentifier("tab.insights")
-        }
-    }
-}
-
-/// Phase 2 以降で各 Feature の View へ差し替える。
-private struct PlaceholderScreen: View {
-    let titleKey: LocalizedStringKey
-
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView {
-                Label(titleKey, systemImage: "hourglass")
-            } description: {
-                Text("placeholder.description")
-            }
-            .navigationTitle(titleKey)
         }
     }
 }

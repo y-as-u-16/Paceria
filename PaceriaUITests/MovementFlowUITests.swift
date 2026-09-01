@@ -9,9 +9,10 @@ final class MovementFlowUITests: XCTestCase {
     @MainActor
     func testLogsMovementThenDeletesIt() throws {
         let app = XCUIApplication()
+        app.launchArguments = ["-skipOnboarding"]
         app.launch()
 
-        app.tabBars.buttons["tab.activity"].tap()
+        app.tabButton(.activity).tap()
 
         let list = app.collectionViews["movement.list"]
         let initialCount = list.exists ? list.cells.count : 0
