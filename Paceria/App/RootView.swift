@@ -12,24 +12,28 @@ struct RootView: View {
             } label: {
                 Label("tab.home", systemImage: "house")
             }
+            .accessibilityIdentifier("tab.home")
 
             Tab(value: AppTab.library) {
                 PlaceholderScreen(titleKey: "tab.library")
             } label: {
                 Label("tab.library", systemImage: "books.vertical")
             }
+            .accessibilityIdentifier("tab.library")
 
             Tab(value: AppTab.activity) {
                 PlaceholderScreen(titleKey: "tab.activity")
             } label: {
                 Label("tab.activity", systemImage: "figure.walk")
             }
+            .accessibilityIdentifier("tab.activity")
 
             Tab(value: AppTab.insights) {
                 PlaceholderScreen(titleKey: "tab.insights")
             } label: {
                 Label("tab.insights", systemImage: "chart.bar")
             }
+            .accessibilityIdentifier("tab.insights")
         }
     }
 }
